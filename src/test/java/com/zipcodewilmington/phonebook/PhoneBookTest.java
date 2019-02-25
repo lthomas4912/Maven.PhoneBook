@@ -20,18 +20,15 @@ public class PhoneBookTest {
     public void addTest(){
 
         //Given
-
+        String name = "Sheila";
+        String number = "3028578983";
 
         //When
-        phoneBook.add("Sheila", "3028578983");
-
-
+        phoneBook.add(name, number);
 
         //Then
-        int expected = phoneBook.size();
-        int actual = 1;
 
-        Assert.assertEquals(expected,actual);
+        Assert.assertEquals(number,phoneBook.lookup(name));
 
 
     }
@@ -40,37 +37,67 @@ public class PhoneBookTest {
 
     public void removeTest(){
         //Given
-        phoneBook.add("Sheila", "3028578983");
+        PhoneBook phoneBook = new PhoneBook();
+        String name = "Sheila";
+        String number = "3028578983";
 
         //When
-        phoneBook.remove("Sheila");
+        phoneBook.add(name, number);
+        phoneBook.removeName(name);
 
 
         //Then
-        int expected = phoneBook.size();
-        int actual = 0;
-        Assert.assertEquals(expected,actual);
+
+        Assert.assertEquals(phoneBook,phoneBook.lookup(name));
 
     }
 
     @Test
 
     public void lookUpTest(){
+
         //Given
+        PhoneBook phoneBook = new PhoneBook();
         String name = "Sheila";
-        phoneBook.add("", "");
-        ArrayList<String> expected = new ArrayList<String>();
-        expected.add("");
+        String number = "3028578983";
+
+
 
         //When
-
+        phoneBook.add(name, number);
 
         //Then
-        Assert.assertEquals(expected,actual);
-
+        Assert.assertEquals(phoneBook,phoneBook.lookup(name));
 
     }
 
+    @Test
+
+    public void testPrintListOfNames() {
+
+        //Given
+        PhoneBook phoneBook = new PhoneBook();
+
+        String name1 = "Momma MayI";
+        String name2 = "Chick Fila";
+        String name3 = "Burger King";
+        String num1 = "3024323385";
+        String num2 = "1223455672";
+        String num3 = "3930383833";
+        String expected = "Momma MayI 3024323385\n"+
+                          "Chick Fila 1223455672\n"+
+                          "Burger King 3930383833\n";
+
+
+        //When
+        phoneBook.add(name3, num3);
+        phoneBook.add(name2, num2);
+        phoneBook.add(name1, num1);
+
+        //Then
+
+        Assert.assertEquals(expected, phoneBook.listNamesAndNumbers());
+        }
 
 
 }
